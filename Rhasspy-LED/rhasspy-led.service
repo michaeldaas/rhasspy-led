@@ -1,13 +1,13 @@
 [Unit]
-Description=mein Rhasspy LED Servic3
+Description=Rhasspy LED Service
 After=syslog.target
 
 [Service]
 Type=simple
-User=root
-Group=root
-WorkingDirectory=/opt/Rhasspy-LED/Rhasspy-LED
-ExecStart=/usr/bin/python3 /opt/Rhasspy-LED/Rhasspy-LED/Rhasspy-LED.py
+User=michael
+Group=michael
+WorkingDirectory=/home/michael/git/rhasspy-led/Rhasspy-LED
+ExecStart=/usr/bin/python3 /home/michael/git/rhasspy-led/Rhasspy-LED/Rhasspy-LED.py
 SyslogIdentifier=rhasspyled
 StandardOutput=syslog
 StandardError=syslog
