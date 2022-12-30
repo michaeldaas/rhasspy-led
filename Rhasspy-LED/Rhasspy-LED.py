@@ -50,29 +50,29 @@ class RhasspyLED(object):
     self.strip.clear_strip()
 
   def _count_up(self, color, speed=.3):
-      self.strip.set_pixel(0, *color)
-      self.strip.show()
-      sleep(speed)
-      self.strip.set_pixel(1, *color)
-      self.strip.show()
-      sleep(speed)
-      self.strip.set_pixel(2, *color)
-      self.strip.show()
-      sleep(speed)
+    self.strip.set_pixel(0, *color)
+    self.strip.show()
+    sleep(speed)
+    self.strip.set_pixel(1, *color)
+    self.strip.show()
+    sleep(speed)
+    self.strip.set_pixel(2, *color)
+    self.strip.show()
+    sleep(speed)
 
   def _count_down(self, color, speed=.3):
-      self.strip.set_pixel(0, *color)
-      self.strip.set_pixel(1, *color)
-      self.strip.set_pixel(2, *color)
-      self.strip.show()
-      sleep(speed)
-      self.strip.set_pixel(0, 0,0,0)
-      self.strip.show()
-      sleep(speed)
-      self.strip.set_pixel(1, 0,0,0)
-      self.strip.show()
-      sleep(speed)
-      self.strip.clear_strip()
+    self.strip.set_pixel(0, *color)
+    self.strip.set_pixel(1, *color)
+    self.strip.set_pixel(2, *color)
+    self.strip.show()
+    sleep(speed)
+    self.strip.set_pixel(0, 0,0,0)
+    self.strip.show()
+    sleep(speed)
+    self.strip.set_pixel(1, 0,0,0)
+    self.strip.show()
+    sleep(speed)
+    self.strip.clear_strip()
 
   def _blink(self, color, times, speed=.3):
     for j in range(times):
@@ -137,10 +137,14 @@ class RhasspyLED(object):
       else:
         counter += 1
 
-        if counter == 50:
-          self._blink((255,0,0), 3, .1)
-        elif counter == 15:
-          self._blink((255,0,0), 1, .1)
+        if counter == 15:
+          self.strip.set_pixel(0, 255,0,0)
+          self.strip.show()
+        elif counter ==20:
+          self.strip.clear_strip()
+        elif counter == 50:
+          self.strip.set_pixel(0, 255,0,0)
+          self.strip.show()
 
   def _button_pressed(self, counter):
     if counter >= 50:
