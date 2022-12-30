@@ -1,29 +1,35 @@
 
 # Rhasspy-LED
-LED-Service for Rhasspy with a Raspberry and ReSpeaker 2-Mics Pi HAT  
-  
-  Nach dem Wakeword werden die LEDs grün und nach dem Sprachbefehl bis zum Ende des Prozesses blau. Anschließend erlöschen die LEDs wieder.
-  Man kann die Funktion durch einen kurzen Tastendruck auf den Button (de)aktivieren.
-  Drückt man 3 Sekunden, wird das Mikro aus- bzw. angeschaltet.
-  Hält man den Button 10 Sekunden gedrückt, leuchtet die LED für 2 Sekunden rot und der RPI wird heruntergefahren. Nach ca. 30 Sekunden kann man ihn dann vom Strom trennen.
+LED-Service for Rhasspy on Raspberry Zero 2W and ReSpeaker 2-mic hat
 
-#### Install Driver  
-sudo apt-get update  
-sudo apt-get upgrade  
-git clone https://github.com/respeaker/seeed-voicecard.git  
-cd seeed-voicecard  
-sudo ./install.sh  
-reboot  
+On wakeword detection, the LEDs turn green, after your voice command they turn blue until the ond of the session.
+A single button press starts a new session.
+Holding the button for at least 3s disables hotword detection on this satellite. The LEDs turn solid red.
+Holding hte button for at least 10s safely shuts down the Pi.
 
-#### Install Service  
-Use 'raspi-config' to enable SPI.  
-cd /opt  
-sudo git clone https://github.com/jens-schiffke/Rhasspy-LED.git  
-sudo apt-get install python3-pip  
-sudo pip3 install rpi.gpio  
-sudo pip3 install apa102_pi  
-sudo apt-get install python3-paho-mqtt  
-sudo cp /opt/Rhasspy-LED/Rhasspy-LED/rhasspy-led.service /etc/systemd/system/  
-sudo systemctl daemon-reload  
-sudo systemctl enable rhasspy-led.service  
-sudo reboot  
+
+## Install Driver  
+``` bash
+sudo apt-get update 
+sudo apt-get upgrade 
+git clone https://github.com/respeaker/seeed-voicecard.git 
+cd seeed-voicecard 
+sudo ./install.sh 
+sudo reboot
+```
+
+## Install Service  
+Use 'raspi-config' to enable SPI.
+``` bash
+sudo git clone https://github.com/michaeldaas/rhasspy-led.git 
+sudo pip3 install rpi.gpio apa102_pi 
+sudo apt-get install python3-paho-mqtt
+```
+
+Edit correct path in rhasspy-led.service according to your installation
+
+``` bash
+sudo cp ./rhasspy-led/Rhasspy-LED/rhasspy-led.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable rhasspy-led.service
+```
