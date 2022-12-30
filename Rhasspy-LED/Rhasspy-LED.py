@@ -145,7 +145,7 @@ class RhasspyLED(object):
   def _button_pressed(self, counter):
     if counter >= 50:
       self._count_down((255,0,0), 1)
-      os.system("shutdown -h now")
+      os.system('sudo shutdown now')
     elif counter >= 15 and not self.muted:
       self.muted = True
       for i in range(0,3):
