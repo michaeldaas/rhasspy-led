@@ -91,6 +91,7 @@ class RhasspyLED(object):
     client.subscribe("hermes/nlu/intentNotRecognized")
     client.subscribe("hermes/dialogueManager/sessionEnded")
     client.subscribe("home/rhasspy/blink")
+    client.subscribe("home/rhasspy/hotwordEnabled")
 
   def on_message(self, client, userdata, msg):
     payload = json.loads(msg.payload)
@@ -119,6 +120,15 @@ class RhasspyLED(object):
       speed = payload['speed'] if 'speed' in payload.keys() else .5
 
       self._blink(color, times, speed)
+    elif msg.topic == "home/rhasspy/hotwordEnabled" and self.siteId in payload['siteId']:
+      if payload['state'] == 'off':
+        self.muted = True
+        for i in range(0,3):
+          self.strip.set_pixel(i,255,0,0)
+        self.strip.show()
+      elif payload['state'] == 'on':
+        self.muted = False
+        self.strip.clear_strip()
 
   def button_loop(self):
     BUTTON = 17
